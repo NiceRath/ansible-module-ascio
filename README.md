@@ -40,7 +40,7 @@ The main challenge when configuring the domain config is that there are differen
 
 You can check the requirements a TLD using the **ASCIO TLDKit**:
 
-* Open the URL `https://tldkit.ascio.com/api/v1/Tldkit/<TLD>` (*replace the leading '\<TLD>'*)
+* Open the URL `https://tldkit.ascio.com/api/v1/Tldkit/<TLD>` (*replace the trailing '\<TLD>'*)
 * Log-in with your ASCIO credentials
 
 You will have to either:
