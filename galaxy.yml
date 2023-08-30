@@ -9,6 +9,8 @@ authors:
 description: "Ansible Module to manage Domains on ASCIO"
 license_file: 'LICENSE'
 tags:
+  - 'cloud'
+  - 'infrastructure'
   - 'domain'
   - 'domains'
   - 'dns'

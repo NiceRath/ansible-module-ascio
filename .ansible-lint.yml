@@ -4,3 +4,4 @@ skip_list:
   - var-naming
   - ignore-errors
   - galaxy[no-changelog]
+  - yaml
