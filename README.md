@@ -22,7 +22,7 @@ ansible-galaxy install niceshopsOrg.ascio
 ansible-galaxy install git+https://github.com/niceshops/ansible-module-ascio.git
 ```
 
-To allow connections using the API you need to add your **source Public-IPs to the allow-list** that you can find in your ASCIO account settings!
+To allow connections using the API you need to add your **source Public-IPs to the allow-list** which you can find in your ASCIO account settings!
 
 ----
 
@@ -31,6 +31,8 @@ To allow connections using the API you need to add your **source Public-IPs to t
 ### Get Domain information
 
 Check out the [example playbook](https://github.com/niceshops/ansible-module-ascio/blob/main/playbook_get.yml)!
+
+Each query is limited to 1000 domains! If you have more than that you will have to go through multiple 'pages' (*multiple runs*)
 
 ### Register Domain
 
@@ -53,5 +55,3 @@ As an example on how a raw TLD-Config could look like - see: [example config](ht
 #### Run
 
 Check out the [example playbook](https://github.com/niceshops/ansible-module-ascio/blob/main/playbook_register.yml)!
-
-Each query is limited to 1000 domains! If you have more than that you will have to go through multiple 'pages' (*multiple runs*)
