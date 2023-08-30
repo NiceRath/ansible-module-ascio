@@ -5,3 +5,4 @@ skip_list:
   - ignore-errors
   - galaxy[no-changelog]
   - yaml
+  - meta-runtime[unsupported-version]
