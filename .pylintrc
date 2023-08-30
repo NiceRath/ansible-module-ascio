@@ -436,6 +436,7 @@ disable=raw-checker-failed,
         W0511,  # todo
         W0707,  # re-raise exception
         E0611, E0401,  # unable to import
+        R0205,  # filter_plugins
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
