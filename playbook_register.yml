@@ -1,0 +1,82 @@
+---
+
+- name: ASCIO Register
+  hosts: localhost
+  vars_prompt:
+    - name: api_user
+      prompt: Provide the api user (same as for the portal.ascio.com login)
+      private: no
+    - name: api_pwd
+      prompt: Provide the api password
+      private: yes
+    - name: force
+      prompt: Do you want to force the processing? (documentation required) [yes/NO]
+      private: no
+      default: 'no'
+    - name: register_premium
+      prompt: Do you want to enable registration of premium domains? (costly) [yes/NO]
+      private: no
+      default: 'no'
+    - name: register_max_price
+      prompt: Set your max price for domain registration! Default=100€
+      private: no
+      default: '100'
+
+  vars:
+    domain:
+      name: 'example.org'
+      nameservers:
+        - 'ns-cloud-d1.googledomains.com.'
+        - 'ns-cloud-d2.googledomains.com.'
+        - 'ns-cloud-d3.googledomains.com.'
+        - 'ns-cloud-d4.googledomains.com.'
+      local_presence: false
+
+    domain_registrant:
+      owner: {}
+      tech: {}
+      admin: {}
+      billing: {}
+
+  tasks:
+    - name: ASCIO | Register/Update the domain
+      niceshopsOrg.ascio.register:
+        user: "{{ api_user }}"
+        password: "{{ api_pwd }}"
+        domain: "{{ domain.name }}"
+        nameservers: "{{ domain.nameservers }}"
+        contact_owner: "{{ domain_registrant.owner }}"
+        contact_tech: "{{ domain_registrant.tech }}"
+        contact_admin: "{{ domain_registrant.admin }}"
+        contact_billing: "{{ domain_registrant.billing }}"
+        premium: "{{ register_premium | bool }}"
+        max_price: "{{ register_max_price }}"
+        # update_only_ns: false
+        force: "{{ force | default(ascio_force) }}"
+        lp: "{{ domain.local_presence }}"
+      register: result
+      ignore_errors: true
+
+    - name: ASCIO | Changed result
+      ansible.builtin.debug:
+        msg: "Result: {{ result.msg }},
+        Owned: {{ result.owner }},
+        Available: {{ result.available }},
+        Price: {{ result.price }} {{ result.price_currency }},
+        Premium: {{ result.premium }}"
+      when:
+        - not result.failed | default(false)
+        - result.changed | default(false)
+
+    - name: ASCIO | Order
+      ansible.builtin.debug:
+        msg: "{% if 'order' in result and result.order is not none and 'OrderId' in result['order'] %}OrderId: {{ result.order['OrderId'] }}{% else %}None{% endif %}"
+      when:
+        - result.failed is undefined or not result.failed
+        - result.changed | default(false)
+        - not ansible_check_mode
+
+    - name: ASCIO | Error result
+      ansible.builtin.debug:
+        msg: "Result: {{ result.errors }}"
+      when: result.failed | default(false)

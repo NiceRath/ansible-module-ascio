@@ -1,0 +1,11 @@
+---
+
+# see: https://yamllint.readthedocs.io/en/latest/rules.html
+
+extends: default
+
+rules:
+  truthy:
+    allowed-values: ['true', 'false', 'yes', 'no', 'True', 'False']
+  line-length:
+    max: 180

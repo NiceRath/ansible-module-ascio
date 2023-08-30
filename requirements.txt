@@ -1,0 +1,3 @@
+# python pip requirements
+requests
+zeep

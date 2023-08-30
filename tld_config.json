@@ -1,0 +1,301 @@
+{
+    "contact_keys": [
+        "owner",
+        "billing",
+        "tech",
+        "admin"
+    ],
+    "fields": {
+        "company": {
+            "owner": [
+                "FirstName",
+                "LastName",
+                "Address1",
+                "City",
+                "PostalCode",
+                "CountryCode",
+                "Phone",
+                "Email",
+                "OrgName",
+                "State",
+                "VatNumber",
+                "OrganisationNumber",
+                "Address2",
+                "Details",
+                "Fax",
+                "Type"
+            ],
+            "all": [
+                "FirstName",
+                "LastName",
+                "Address1",
+                "City",
+                "PostalCode",
+                "CountryCode",
+                "Phone",
+                "Email",
+                "OrgName",
+                "State",
+                "OrganisationNumber",
+                "Address2",
+                "Details",
+                "Fax",
+                "Type"
+            ]
+        },
+        "person": {
+            "owner": [
+                "FirstName",
+                "LastName",
+                "Address1",
+                "City",
+                "PostalCode",
+                "CountryCode",
+                "Phone",
+                "Email",
+                "State",
+                "Address2",
+                "Details",
+                "Fax",
+                "Type",
+                "RegistrantDate"
+            ],
+            "all": [
+                "FirstName",
+                "LastName",
+                "Address1",
+                "City",
+                "PostalCode",
+                "CountryCode",
+                "Phone",
+                "Email",
+                "State",
+                "Address2",
+                "Details",
+                "Fax",
+                "Type"
+            ]
+        }
+    },
+    "country_overrides": {
+        "cz": {
+            "person": {
+                "fields": [
+                    "OrgName"
+                ]
+            }
+        },
+        "dk": {
+            "company": {
+                "all": {
+                    "Type": "V"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "P"
+                }
+            }
+        },
+        "ee": {
+            "company": {
+                "all": {
+                    "Type": "org"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "priv"
+                },
+                "fields": [
+                    "OrganisationNumber"
+                ]
+            },
+            "local_presence": true
+        },
+        "es": {
+            "company": {
+                "all": {
+                    "Type": "1"
+                },
+                "admin": {
+                    "Type": "0",
+                    "OrgName": "",
+                    "OrganisationNumber": "YOUR-TECHNICAL-CONTACT-PASSPORT-NR",
+                    "FirstName": "YOUR-TECHNICAL-CONTACT-FIRSTNAME",
+                    "LastName": "YOUR-TECHNICAL-CONTACT-LASTNAME"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "0"
+                },
+                "fields": [
+                    "OrganisationNumber"
+                ]
+            }
+        },
+        "fi": {
+            "company": {
+                "all": {
+                    "Type": "1"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "0"
+                }
+            }
+        },
+        "fr": {
+            "company": {
+                "all": {
+                    "Type": "company"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "individual"
+                }
+            }
+        },
+        "hu": {
+            "person": {
+                "fields": [
+                    "OrganisationNumber"
+                ]
+            },
+            "local_presence": true
+        },
+        "ie": {
+            "company": {
+                "all": {
+                    "Type": "COM"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "OTH"
+                }
+            }
+        },
+        "it": {
+            "company": {
+                "all": {
+                    "Type": "7"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "1"
+                },
+                "fields": [
+                    "OrganisationNumber"
+                ]
+            }
+        },
+        "lt": {
+            "company": {
+                "all": {
+                    "Type": "ORG"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "IND"
+                }
+            }
+        },
+        "lv": {
+            "person": {
+                "fields": [
+                    "OrganisationNumber"
+                ]
+            }
+        },
+        "nl": {
+            "company": {
+                "all": {
+                    "Type": "BGG"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "PERSOON"
+                }
+            }
+        },
+        "ro": {
+            "company": {
+                "all": {
+                    "Type": "c"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "p"
+                },
+                "fields": [
+                    "OrgName"
+                ]
+            }
+        },
+        "ru": {
+            "company": {
+                "all": {
+                    "Type": "ORG"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "PRS"
+                },
+                "fields": [
+                    "OrgName",
+                    "OrganisationNumber"
+                ]
+            }
+        },
+        "se": {
+            "person": {
+                "fields": [
+                    "OrganisationNumber"
+                ]
+            }
+        },
+        "uk": {
+            "company": {
+                "all": {
+                    "Type": "FCORP"
+                }
+            },
+            "person": {
+                "all": {
+                    "Type": "FIND"
+                }
+            }
+        }
+    },
+    "default": {
+        "owner": {
+            "VatNumber": "YOUR-VAT-NUMBER"
+        },
+        "billing": {
+            "Email": "YOUR-MAIL-TO-RECEIVE-DOMAIN-BILLS"
+        },
+        "type": "company",
+        "all": {
+            "FirstName": "YOUR-REGISTRANT-FIRSTNAME",
+            "LastName": "YOUR-REGISTRANT-LASTNAME",
+            "Address1": "YOUR-ADDRESS",
+            "City": "YOUR-CITY",
+            "PostalCode": "YOUR-POSTAL-CODE",
+            "CountryCode": "YOUR-COUNTRY-CODE",
+            "Phone": "YOUR-TELEPHONE-NUMBER-IN-FORMAT-'+<LAND>.<NUMBER>'",
+            "Email": "YOUR-MAIL-TO-RECEIVE-DOMAIN-MAILS",
+            "OrgName": "YOUR-COMPANY-NAME",
+            "State": "YOUR-STATE-OR-PROVINCE",
+            "OrganisationNumber": "YOUR-INTERNATIONAL-ORG-NUMBER"
+        }
+    }
+}

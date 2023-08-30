@@ -1,0 +1,73 @@
+---
+
+- name: ASCIO Get Information
+  hosts: localhost
+  vars_prompt:
+    - name: api_user
+      prompt: Provide the api user (same as for the portal.ascio.com login)
+      private: no
+    - name: api_pwd
+      prompt: Provide the api password
+      private: yes
+    - name: filter_names
+      prompt: Provide domains to search (comma separated)
+      private: no
+      default: ''
+    - name: filter_tld_list
+      prompt: Provide a comma-separated list of tlds to filter on
+      private: no
+      default: ''
+    - name: output_console
+      prompt: Output result to console?
+      private: no
+      default: 'yes'
+    - name: output_file
+      prompt: Output result to file? (/tmp/ascio_get_${DATETIME}.json & /tmp/ascio_get_${DATETIME}.csv)
+      private: no
+      default: 'yes'
+    - name: ascio_get_page
+      prompt: Get another 'page' via API? (limited to 1000 results..)
+      private: no
+      default: "1"
+
+  tasks:
+    - name: ASCIO | Get domain details if we registered it
+      niceshopsOrg.ascio.get:
+        user: "{{ api_user }}"
+        password: "{{ api_pwd }}"
+        filter_names: "{{ filter_names.split(',') }}"
+        filter_tld: "{{ filter_tld }}"
+        #    filter_type: 'Premium'
+        #    filter_comment: 'Test'
+        #    filter_status: "{{ filter_status | default('All') }}"
+        #    filter_expire_from: '2021-10-12T13:08:56.956+02:00'
+        #    filter_expire_to: '2021-10-12T16:08:56.956+02:00'
+        #    results: 5000
+        results_page: "{{ ascio_get_page }}"
+      register: result
+      delegate_to: localhost
+      ignore_errors: true
+
+    - name: ASCIO | Output to Console
+      ansible.builtin.debug:
+        msg: [
+          "filter domains: {{ filter_names.split(',') }}",
+          "filter tld's: {{ filter_tld }}",
+          "{{ result }}"
+        ]
+      when: output_console | bool
+      ignore_errors: true
+
+    - name: ASCIO | Writing output to json-file
+      ansible.builtin.copy:
+        content: "{{ result | filter_results | to_json }}"
+        dest: "/tmp/ascio_get_{{ filter_tld }}_{{ ansible_date_time.iso8601_basic }}.json"
+        mode: 0640
+      when: output_file | bool
+      ignore_errors: true
+
+    - name: ASCIO | Writing output to csv-file
+      ansible.builtin.debug:
+        msg: "{{ result | filter_results | write_domain_csv('/tmp/ascio_get_' + filter_tld + '_' + ansible_date_time.iso8601_basic + '.csv') }}"
+      when: output_file | bool
+      ignore_errors: true

@@ -1,0 +1,7 @@
+# pip requirements
+yamllint
+pylint
+ansible-core
+ansible-lint
+requests
+zeep

@@ -1,0 +1,20 @@
+---
+
+namespace: 'niceshopsorg'
+name: 'ascio'
+version: 1.0.0
+readme: 'README.md'
+authors:
+  - 'Rene Rath <rene.rath@niceshops.com>'
+description: "Ansible Module to manage Domains on ASCIO"
+license_file: 'LICENSE'
+tags:
+  - 'domain'
+  - 'domains'
+  - 'dns'
+dependencies: {}
+repository: 'https://github.com/niceshops/ansible-module-ascio'
+documentation: 'https://github.com/niceshops/ansible-module-ascio/README.md'
+homepage: 'https://www.niceshops.com'
+issues: 'https://github.com/niceshops/ansible-module-ascio/issues'
+build_ignore: []
