@@ -2,7 +2,7 @@
 
 namespace: 'niceshopsorg'
 name: 'ascio'
-version: 1.0.2
+version: 1.0.3
 readme: 'README.md'
 authors:
   - 'Rene Rath <rene.rath@niceshops.com>'

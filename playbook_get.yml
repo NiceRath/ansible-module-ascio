@@ -1,5 +1,7 @@
 ---
 
+# NOTE: some custom 'filter_plugins' are used: https://github.com/niceshops/ansible-module-ascio/tree/main/plugins/filter
+
 - name: ASCIO Get Information
   hosts: localhost
   vars_prompt:
@@ -30,6 +32,9 @@
       private: no
       default: "1"
 
+  vars:
+    remove_fields_from_results: ['PrivacyProxy', 'DnsSecKeys', 'Trademark', 'Reseller']
+
   tasks:
     - name: ASCIO | Get domain details if we registered it
       niceshopsOrg.ascio.get:
@@ -44,23 +49,26 @@
         #    filter_expire_to: '2021-10-12T16:08:56.956+02:00'
         #    results: 5000
         results_page: "{{ ascio_get_page }}"
-      register: result
+      register: results
       delegate_to: localhost
-      ignore_errors: true
+
+    - name: ASCIO | Filter resultes
+      ansible.builtin.set_fact:
+        filtered_results: "{{ results | ascio_filter_results(remove_fields_from_results) }}"
 
     - name: ASCIO | Output to Console
       ansible.builtin.debug:
         msg: [
           "filter domains: {{ filter_names.split(',') }}",
           "filter tld's: {{ filter_tld }}",
-          "{{ result }}"
+          "{{ filtered_results }}"
         ]
       when: output_console | bool
       ignore_errors: true
 
     - name: ASCIO | Writing output to json-file
       ansible.builtin.copy:
-        content: "{{ result | filter_results | to_json }}"
+        content: "{{ filtered_results | to_json }}"
         dest: "/tmp/ascio_get_{{ filter_tld }}_{{ ansible_date_time.iso8601_basic }}.json"
         mode: 0640
       when: output_file | bool
@@ -68,6 +76,6 @@
 
     - name: ASCIO | Writing output to csv-file
       ansible.builtin.debug:
-        msg: "{{ result | filter_results | write_domain_csv('/tmp/ascio_get_' + filter_tld + '_' + ansible_date_time.iso8601_basic + '.csv') }}"
+        msg: "{{ filtered_results | ascio_write_domain_csv('/tmp/ascio_get_' + filter_tld + '_' + ansible_date_time.iso8601_basic + '.csv') }}"
       when: output_file | bool
       ignore_errors: true
