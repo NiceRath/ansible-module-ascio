@@ -12,6 +12,8 @@ To automate the registration/update process we implemented the most important AP
 
 ## Install
 
+Ansible Galaxy: [Collection](https://galaxy.ansible.com/ui/repo/published/niceshopsorg/ascio/)
+
 ```
 # install the requirements on your controller
 python3 -m pip install -r requirements.txt
